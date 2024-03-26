@@ -60,7 +60,7 @@ const Store = () => {
 		try {
 			const res = await axios.get(`${API}/v1/store`)
 			if (res.data.success) {
-				console.log(res.data)
+
 				setData({
 					...data, store: res.data.store, product: res.data.product, order: res.data.orders, url: res.data.url, purl: res.data.purl
 				})
@@ -171,7 +171,7 @@ const Store = () => {
 					<div className='mt-4'>
 						<div className='overflow-auto no-scrollbar'>
 
-							<OrderFetch data={postperOrderData} setOpen3={setOpen3} />
+							<OrderFetch data={postperOrderData} setOpen3={setOpen3} url={data.purl} />
 							{data.order?.length > postPerPage && <Pagination
 								postPerPage={postPerPage}
 								setCurrentPage={setCurrentPage}

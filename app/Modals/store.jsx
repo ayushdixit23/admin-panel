@@ -117,8 +117,8 @@ const StoreModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 							</div>
 						</div>
 						<div className='max-w-full h-full flex justify-center items-center p-3'>
-							<img src={data[0]?.address.documentfile} alt='image' className='w-full h-full object-contain bg-black rounded-lg' />
-							{/* <img src={data[0]?.documentphoto} alt='image' /> */}
+							{/* <img src={data[0]?.address.documentfile} alt='image' className='w-full h-full object-contain bg-black rounded-lg' /> */}
+							<img src={data[0]?.documentphoto} alt='image' className='w-full h-full object-contain bg-black rounded-lg max-w-[350px]' />
 						</div>
 					</div>
 				</div>

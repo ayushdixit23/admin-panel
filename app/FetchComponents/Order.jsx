@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { formatDate } from '../Components/Useful'
 
-const OrderFetch = ({ data, setOpen3 }) => {
+const OrderFetch = ({ data, setOpen3, url }) => {
 	return (
 		<table className="w-full text-sm text-left min-w-[1100px] rtl:text-right text-gray-500 dark:text-gray-400">
 			<thead className="text-xs text-gray-700 uppercase bg-[#f1f1f1] dark:bg-[#0b0808] dark:text-gray-400">
@@ -13,7 +13,7 @@ const OrderFetch = ({ data, setOpen3 }) => {
 					<th scope="col" className="px-6 py-3">
 						Product
 					</th>
-					<th scope="col" className="px-6 py-3">
+					<th scope="col" className="px-6 py-3 min-w-[140px]">
 						Date
 					</th>
 					<th scope="col" className="px-6 py-3">
@@ -37,15 +37,16 @@ const OrderFetch = ({ data, setOpen3 }) => {
 							<td className="px-6 py-4">
 								{d?._id}
 							</td>
+						
 							<th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-								<img className="w-10 h-10 rounded-full" src={data.purl + d?.productId?.[0]?.images?.[0]?.content} alt="Product Image" />
+								<img className="w-10 h-10 rounded-full" src={url + d?.productId?.[0]?.images?.[0]?.content} alt="Product Image" />
 								<div className="ps-3">
-									<div className="text-base font-semibold">{d?.productId?.[0]?.name}</div>
+									<div className="text-base font-semibold">{d?.productId?.[0]?.name.length > 40 ? `${d?.productId?.[0]?.name.slice(0, 40)}...` : d?.productId?.[0]?.name}</div>
 								</div>
 							</th>
 
 
-							<td className="px-6 py-4">
+							<td className="px-6 py-4 min-w-[140px]">
 								{formatDate(d?.createdAt)}
 							</td>
 							<td className="px-6 py-4">

@@ -24,7 +24,6 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 			} else {
 				toast.error(res.data.message)
 			}
-			console.log(res.data)
 			setOpen(false)
 			setLoading(false)
 		} catch (error) {
@@ -60,6 +59,7 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 					<div className='flex flex-col bg-[#181818]/50 rounded-lg p-3'>
 						<div>
 							<div class="flex items-center p-2">
+
 								<div class="relative">
 									<img class="h-16 w-16 rounded-full object-cover" src={data[0]?.proficpic} alt="Avatar" />
 									<div class="absolute inset-0 rounded-full shadow-inner"></div>

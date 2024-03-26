@@ -15,7 +15,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 	});
 
 	const handleapprovals = async (e, status, pid) => {
-		console.log(pid)
+
 		e.preventDefault()
 		try {
 			setLoading(true)
@@ -26,7 +26,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 			} else {
 				toast.error(res.data.message)
 			}
-			console.log(res.data)
+
 			if (data[0]?.products.length === 0 || data[0]?.products.length === 1) {
 				setOpen(false)
 			} else {
@@ -59,7 +59,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 			} else {
 				toast.error(res.data.message)
 			}
-			console.log(res.data)
+
 			setOpen(false)
 			setLoading(false)
 		} catch (error) {
@@ -113,7 +113,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 								</div>
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
 									<div>Address</div>
-									<div>{data[0]?.address.buildingno}</div>
+									<div className='sm:max-w-[50%]'>{data[0]?.address.buildingno}</div>
 								</div>
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
 									<div>Pincode</div>
@@ -150,7 +150,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 										data[0]?.products?.map((d, i) => (
 											<div key={d?.id} className='flex justify-center gap-4 items-center w-full'>
 												<div>
-													<img class=" rounded-2xl object-cover" src={d?.dp} alt="Avatar" />
+													<img class="w-20 h-16 rounded-2xl object-cover" src={d?.dp} alt="Avatar" />
 												</div>
 												<div className='flex flex-col w-full'>
 													<div className=''>{d?.name}</div>

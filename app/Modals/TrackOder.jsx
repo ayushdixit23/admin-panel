@@ -11,6 +11,8 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 
 	console.log(data)
 
+	const uniqueSellerIds = [...new Set(data[0]?.sellerId.map(seller => seller?._id))];
+
 	return (
 		<div className='fixed inset-0 w-screen h-screen p-2 flex justify-center items-center bg-black/50 '>
 			<div className='md:w-[80%] w-full p-5 rounded-lg  flex flex-col dark:text-white dark:bg-[#101010] bg-white text-black h-auto'>
@@ -73,7 +75,7 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 						</div>
 						<div className='overflow-auto no-scrollbar'>
 							<div className='grid grid-cols-2 gap-3 max-h-[300px]'>
-								{
+								{/* {
 									data[0]?.sellerId?.map((d, i) => (
 										<div key={i} className='p-3 rounded-lg min-w-[350px] w-full bg-[#0D0D0D]'>
 											<div className='flex border-b border-white pb-3 flex-col'>
@@ -105,9 +107,10 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 												data[0].data?.filter((w) => w?.seller == d?._id).map((f, k) => (
 													<div key={k} className='flex justify-between pt-3 items-center'>
 														<div className='flex items-center gap-2'>
-															<div><img class="h-16 w-16 rounded-full object-cover" src={purl + f?.images?.[0].content} alt="Avatar" /></div>
+
+															<div><img class="h-14 w-14 rounded-full object-cover" src={purl + f?.product?.images?.[0].content} alt="Avatar" /></div>
 															<div>
-																<div>{f?.product?.name}</div>
+																<div>{f?.product?.name.length > 30 ? `${f?.product?.name.slice(0, 30)}...` : f?.product?.name}</div>
 																<div>{f?.product?.brandname}</div>
 															</div>
 														</div>
@@ -120,7 +123,76 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 											}
 										</div>
 									))
+								} */}
+
+								{
+
+									uniqueSellerIds.map((sellerId, i) => {
+										// Find the corresponding seller object
+										const uniqueSeller = data[0]?.sellerId.find(seller => seller._id === sellerId);
+
+										return (
+											<div key={i} className='p-3 rounded-lg min-w-[350px] w-full bg-[#0D0D0D]'>
+												{/* Seller information */}
+												<div className='flex border-b border-white pb-3 flex-col'>
+													{/* Seller details */}
+													<div className='flex justify-between mt-3 items-center'>
+														{/* Seller profile */}
+														<div className="flex items-center">
+															{/* Seller profile picture */}
+															<div className="relative">
+
+																<img className="h-12 w-12 rounded-full object-cover" src={url + uniqueSeller?.profilepic} alt="Avatar" />
+																<div className="absolute inset-0 rounded-full shadow-inner"></div>
+															</div>
+															{/* Seller name and username */}
+															<div className="ml-2 flex flex-col gap-[2px]">
+																<h2 className="font-bold text-sm">{uniqueSeller?.fullname}</h2>
+																<p className="text-xs">@{uniqueSeller?.username}</p>
+															</div>
+														</div>
+														{/* Seller contact details */}
+														<div className='text-sm flex flex-col gap-1'>
+															<div>UserId:{uniqueSeller?._id}</div>
+															<div>Phone:</div>
+														</div>
+													</div>
+													{/* Seller address */}
+													<div className='flex justify-between mt-2 items-center'>
+														<div>
+															<div>Address</div>
+															<div>{uniqueSeller?.storeAddress.buildingno}, {uniqueSeller?.storeAddress.city}, {uniqueSeller?.storeAddress.state}</div>
+														</div>
+													</div>
+												</div>
+
+												{/* Products sold by the seller */}
+												{
+													// Filter data based on the current seller ID
+													data[0].data?.filter(w => w?.seller === sellerId).map((f, k) => (
+														<div key={k} className='flex justify-between pt-3 items-center'>
+															<div className='flex items-center gap-2'>
+																{/* Product image */}
+																<div><img className="h-14 w-14 rounded-full object-cover" src={purl + f?.product?.images?.[0].content} alt="Avatar" /></div>
+																{/* Product details */}
+																<div>
+																	<div>{f?.product?.name.length > 30 ? `${f?.product?.name.slice(0, 30)}...` : f?.product?.name}</div>
+																	<div>{f?.product?.brandname}</div>
+																</div>
+															</div>
+															{/* Product price and quantity */}
+															<div>
+																<div>₹ {f?.price}</div>
+																<div>Oty: {f?.qty}</div>
+															</div>
+														</div>
+													))
+												}
+											</div>
+										);
+									})
 								}
+
 
 							</div>
 						</div>
