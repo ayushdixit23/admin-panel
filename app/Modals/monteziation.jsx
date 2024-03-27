@@ -44,7 +44,7 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 
 	return (
 
-		<div className='fixed inset-0 w-screen h-screen flex justify-center items-center bg-black/50 '>
+		<div className=' fixed inset-0 w-screen pn:max-sm:overflow-auto pn:max-sm:no-scrollbar min-h-full sm:h-screen bg-black/60 z-50 sm:bg-black/50 container flex justify-center items-center'>
 			<div className='lg:w-[30%] sm:w-[55%] pp:w-[75%] pn:max-pp:w-[335px] flex flex-col text-black p-5 rounded-lg dark:text-white dark:bg-[#101010] bg-white'>
 				<div className='flex justify-between items-center'>
 					<div className='flex gap-2 items-center'>
@@ -61,7 +61,7 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 							<div class="flex items-center p-2">
 
 								<div class="relative">
-									<img class="h-16 w-16 rounded-full object-cover" src={data[0]?.proficpic} alt="Avatar" />
+									<img class="h-16 w-16 rounded-full object-cover" src={data[0]?.profilepic} alt="Avatar" />
 									<div class="absolute inset-0 rounded-full shadow-inner"></div>
 								</div>
 								<div class="ml-2 flex flex-col gap-[2px]">

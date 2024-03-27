@@ -25,25 +25,30 @@ const Header = () => {
 		}
 	}
 
+
+	const toggleoff = () => {
+		setOpen(false)
+	}
+
 	return (
 		<>
 			{open && <div className={`fixed top-0 duration-1000 transition ease-in-out w-screen h-screen z-20 bg-[#273142] ${open ? "left-0" : "-left-[1000px]"}`}>
 				<div className='flex flex-col justify-center h-[90vh] '>
 					<ul className="flex flex-col justify-center relative left-12 text-2xl font-medium ">
 						<li className='py-3'>
-							<Link href="/main/dashboard" className="block py-2 pr-4 pl-3 text-black dark:text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 " aria-current="page">Dashboard</Link>
+							<Link onClick={toggleoff} href="/main/dashboard" className="block py-2 pr-4 pl-3 text-black dark:text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 " aria-current="page">Dashboard</Link>
 						</li>
 						<li className='py-3'>
-							<Link href="/main/store" className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Stores</Link>
+							<Link onClick={toggleoff} href="/main/store" className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100  lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Stores</Link>
 						</li>
 						<li className='py-3'>
-							<Link href="/main/community" className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Community</Link>
+							<Link onClick={toggleoff} href="/main/community" className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100  lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Community</Link>
 						</li>
 						<li className='py-3'>
-							<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Ads</div>
+							<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100  lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Ads</div>
 						</li>
 						<li className='py-3'>
-							<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Bugs & Reports</div>
+							<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100  lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Bugs & Reports</div>
 						</li>
 						<li onClick={() => logout()} className='text-2xl py-3 flex items-center gap-2 text-red-600'>
 							Log Out	<CiLogout className='text-4xl' />

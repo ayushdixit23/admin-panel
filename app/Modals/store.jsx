@@ -50,19 +50,19 @@ const StoreModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 
 	return (
 		<>
-			<div className='fixed inset-0 w-screen h-screen flex justify-center items-center bg-black/50 '>
-				<div className='md:w-[70%] sm:max-md:min-w-[750px] flex flex-col text-black p-5 rounded-lg dark:text-white dark:bg-[#101010] bg-white'>
+			<div className='absolute top-0 left-0 sm:fixed sm:inset-0 w-screen pn:max-sm:overflow-auto pn:max-sm:no-scrollbar min-h-full sm:h-screen bg-black/60 z-50 sm:bg-black/50 container flex justify-center items-center'>
+				<div className='md:w-[70%] sm:max-md:min-w-[750px] flex flex-col text-black p-5 rounded-lg dark:text-white w-full pn:max-sm:h-full container dark:bg-[#101010] bg-white'>
 					<div className='flex justify-between items-center'>
 						<div className='flex gap-2 items-center'>
 							<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
 							<div className='font-bold'>Store request</div>
 						</div>
-						<div onClick={() => setOpen(false)}>
+						<div onClick={() => setOpen(false)} className='text-2xl'>
 							<RxCross2 />
 						</div>
 					</div>
 					<div className='grid mt-3 pn:max-pp:w-[335px] pp:min-w-[450px] sm:grid-cols-2 w-full'>
-						<div className='flex flex-col  bg-[#181818]/50 rounded-lg p-3'>
+						<div className='flex flex-col pn:max-sm:order-2 bg-[#181818]/50 rounded-lg p-3'>
 							<div>
 								<div class="flex items-center">
 									<div class="relative">
@@ -76,7 +76,7 @@ const StoreModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 									</div>
 								</div>
 							</div>
-							<div className='text-xs mt-4'>
+							<div className='text-xs mt-4 bg-[#181818]/50'>
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
 									<div>Request Send</div>
 									<div>{formatDate(data[0]?.createdAt)}</div>
@@ -116,9 +116,9 @@ const StoreModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 								</div>
 							</div>
 						</div>
-						<div className='max-w-full h-full flex justify-center items-center p-3'>
+						<div className='max-w-full pn:max-sm:order-1 h-full flex justify-center items-center p-3'>
 							{/* <img src={data[0]?.address.documentfile} alt='image' className='w-full h-full object-contain bg-black rounded-lg' /> */}
-							<img src={data[0]?.documentphoto} alt='image' className='w-full h-full object-contain bg-black rounded-lg max-w-[350px]' />
+							<img src={data[0]?.documentphoto} alt='image' className='w-full h-full object-contain bg-black rounded-lg max-w-[250px] sm:max-w-[350px]' />
 						</div>
 					</div>
 				</div>

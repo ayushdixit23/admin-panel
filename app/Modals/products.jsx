@@ -80,7 +80,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 
 	return (
 		<>
-			<div className='fixed inset-0 w-screen h-screen flex justify-center items-center bg-black/50 '>
+			<div className='absolute top-0 left-0 sm:fixed sm:inset-0 w-screen pn:max-sm:overflow-auto pn:max-sm:no-scrollbar min-h-full sm:h-screen bg-black/60 z-50 sm:bg-black/50 container flex justify-center items-center'>
 				<div className='md:w-[70%] sm:max-md:min-w-[750px] flex flex-col text-black p-5 rounded-lg dark:text-white dark:bg-[#101010] bg-white'>
 					<div className='flex justify-between items-center'>
 						<div className='flex gap-2 items-center'>

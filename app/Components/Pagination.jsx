@@ -33,7 +33,7 @@ const Pagination = ({ length, postPerPage, firstIndex, lastindex, currentPage, s
 
 	return (
 		<>
-			<div className="flex justify-between items-center p-2">
+			<div className="flex sm:flex-row flex-col justify-between items-center p-2">
 				<div className="text-sm text-[#667085] dark:text-white">Showing {firstIndex + 1}-{lastindex} from {totalPages}</div>
 				<div className="flex justify-center items-center gap-3">
 					<button

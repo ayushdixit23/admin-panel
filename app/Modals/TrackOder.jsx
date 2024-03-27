@@ -14,7 +14,7 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 	const uniqueSellerIds = [...new Set(data[0]?.sellerId.map(seller => seller?._id))];
 
 	return (
-		<div className='fixed inset-0 w-screen h-screen p-2 flex justify-center items-center bg-black/50 '>
+		<div className='absolute top-0 left-0 sm:fixed sm:inset-0 w-screen pn:max-sm:overflow-auto pn:max-sm:no-scrollbar min-h-full sm:h-screen bg-black/60 z-50 sm:bg-black/50 container flex justify-center items-center'>
 			<div className='md:w-[80%] w-full p-5 rounded-lg  flex flex-col dark:text-white dark:bg-[#101010] bg-white text-black h-auto'>
 				<div className='flex justify-between items-center'>
 					<div className='flex gap-2 items-center'>
@@ -26,7 +26,7 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 					</div>
 				</div>
 				<div className='mt-3'>
-					<div className='flex sm:flex-row flex-col pn:max-sm:gap-2 sm:justify-between sm:items-center'>
+					<div className='flex sm:flex-row flex-col gap-3 mb-2 text-sm sm:text-base pn:max-sm:gap-2 sm:justify-between sm:items-center'>
 						<div className='font-bold'>Order ID: {id}</div>
 						<div className='flex sm:justify-center items-center gap-2'>
 							<div className='p-2 px-4 rounded-lg border border-white/10'>Invoice</div>
@@ -42,28 +42,28 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 					<div className='bg-[#0D0D0D] mt-3 rounded-xl p-4'>
 						<div className='font-bold'>Customer Details</div>
 						<div className='flex justify-between mt-3 flex-col sm:flex-row pn:max-sm:gap-3 sm:items-center'>
-							<div class="flex items-center">
-								<div class="relative">
-									<img class="h-16 w-16 rounded-full object-cover" src={url + data[0]?.buyerId?.profilepic
+							<div className="flex items-center">
+								<div className="relative">
+									<img className="h-16 w-16 min-w-10 min-h-10 rounded-full object-cover" src={url + data[0]?.buyerId?.profilepic
 									} alt="Avatar" />
-									<div class="absolute inset-0 rounded-full shadow-inner"></div>
+									<div className="absolute inset-0 rounded-full shadow-inner"></div>
 								</div>
-								<div class="ml-2 flex flex-col gap-[2px]">
-									<h2 class="font-bold ">{data[0]?.buyerId?.fullname}</h2>
-									<p class="text-xs">@{data[0]?.buyerId?.username}</p>
+								<div className="ml-2 flex flex-col gap-[2px]">
+									<h2 className="font-bold ">{data[0]?.buyerId?.fullname}</h2>
+									<p className="pn:max-sm:text-xs">@{data[0]?.buyerId?.username}</p>
 								</div>
 							</div>
 							<div>
-								<div>UserId:{data[0]?.buyerId?._id}</div>
-								{data[0]?.buyerId?.phone && < div > Phone: {data[0]?.buyerId?.phone && data[0].buyerId?.phone.substring(2)}</div>}
+								<div className="text-xs">UserId:{data[0]?.buyerId?._id}</div>
+								{data[0]?.buyerId?.phone && < div className="pn:max-sm:text-xs"> Phone: {data[0]?.buyerId?.phone && data[0].buyerId?.phone.substring(2)}</div>}
 							</div>
 						</div>
 						<div className='flex sm:flex-row flex-col justify-between mt-2 sm:items-center'>
 							<div>
-								<div>Address</div>
-								<div> {data[0]?.buyerId?.address?.streetaddress ? data[0]?.buyerId?.address?.streetaddress : "Not Given"}, {data[0]?.buyerId?.address?.city ? data[0]?.buyerId?.address?.city : "Not Given"}, {data[0]?.buyerId?.address?.state ? data[0]?.buyerId?.address?.state : "Not Given"}</div>
+								<div className="pn:max-sm:text-xs">Address</div>
+								<div className="pn:max-sm:text-xs"> {data[0]?.buyerId?.address?.streetaddress ? data[0]?.buyerId?.address?.streetaddress : "Not Given"}, {data[0]?.buyerId?.address?.city ? data[0]?.buyerId?.address?.city : "Not Given"}, {data[0]?.buyerId?.address?.state ? data[0]?.buyerId?.address?.state : "Not Given"}</div>
 							</div>
-							<div className='text-lg font-semibold'>
+							<div className='sm:text-lg pn:max-sm:mt-2 font-semibold'>
 								Total : ₹{data[0]?.total}
 							</div>
 						</div>
@@ -74,7 +74,7 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 							Store Address
 						</div>
 						<div className='overflow-auto no-scrollbar'>
-							<div className='grid grid-cols-2 gap-3 max-h-[300px]'>
+							<div className='grid sm:grid-cols-2 gap-3 max-h-[300px]'>
 								{/* {
 									data[0]?.sellerId?.map((d, i) => (
 										<div key={i} className='p-3 rounded-lg min-w-[350px] w-full bg-[#0D0D0D]'>
@@ -132,17 +132,17 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 										const uniqueSeller = data[0]?.sellerId.find(seller => seller._id === sellerId);
 
 										return (
-											<div key={i} className='p-3 rounded-lg min-w-[350px] w-full bg-[#0D0D0D]'>
+											<div key={i} className='p-3 rounded-lg min-w-[350px] w-full border-b border-[#3d4654] rounded-b-none bg-[#0D0D0D]'>
 												{/* Seller information */}
 												<div className='flex border-b border-white pb-3 flex-col'>
 													{/* Seller details */}
-													<div className='flex justify-between mt-3 items-center'>
+													<div className='flex sm:flex-row flex-col sm:gap-0 gap-3 justify-between mt-3 dm:items-center'>
 														{/* Seller profile */}
 														<div className="flex items-center">
 															{/* Seller profile picture */}
 															<div className="relative">
 
-																<img className="h-12 w-12 rounded-full object-cover" src={url + uniqueSeller?.profilepic} alt="Avatar" />
+																<img className="min-h-16 min-w-16 max-h-[66px] max-w-[66px] rounded-full object-cover" src={url + uniqueSeller?.profilepic} alt="Avatar" />
 																<div className="absolute inset-0 rounded-full shadow-inner"></div>
 															</div>
 															{/* Seller name and username */}
@@ -170,10 +170,10 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 												{
 													// Filter data based on the current seller ID
 													data[0].data?.filter(w => w?.seller === sellerId).map((f, k) => (
-														<div key={k} className='flex justify-between pt-3 items-center'>
+														<div key={k} className='flex justify-between sm:flex-row flex-col pt-3 sm:items-center'>
 															<div className='flex items-center gap-2'>
 																{/* Product image */}
-																<div><img className="h-14 w-14 rounded-full object-cover" src={purl + f?.product?.images?.[0].content} alt="Avatar" /></div>
+																<div><img className="min-h-14 min-w-14 max-w-16 max-h-16 rounded-full object-cover" src={purl + f?.product?.images?.[0].content} alt="Avatar" /></div>
 																{/* Product details */}
 																<div>
 																	<div>{f?.product?.name.length > 30 ? `${f?.product?.name.slice(0, 30)}...` : f?.product?.name}</div>
@@ -181,7 +181,7 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 																</div>
 															</div>
 															{/* Product price and quantity */}
-															<div>
+															<div className='pn:max-sm:flex pn:max-sm:items-center pn:max-sm:mt-2 pn:max-sm:gap-4'>
 																<div>₹ {f?.price}</div>
 																<div>Oty: {f?.qty}</div>
 															</div>
