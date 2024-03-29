@@ -5,12 +5,15 @@ import { ImSpinner9 } from 'react-icons/im';
 import toast from 'react-hot-toast';
 import { API } from '@/Essentials';
 import axios from 'axios';
+import { usePathname, useRouter } from 'next/navigation';
 
 const StoreModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 
 	const [loading, setLoading] = useState(false)
 	const [state, setState] = useState(false)
 	const [text, setText] = useState("")
+	const path = usePathname()
+	const router = useRouter()
 
 	const data = puradata?.filter((d) => {
 		return d.userid._id === id;
@@ -32,6 +35,7 @@ const StoreModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 			}
 			console.log(res.data)
 			setOpen(false)
+			router.push(path)
 			setLoading(false)
 		} catch (error) {
 			console.log(error)

@@ -6,6 +6,7 @@ import { API } from '@/Essentials';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
+import { usePathname, useRouter } from 'next/navigation';
 
 const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 	const [loading, setLoading] = useState(false)
@@ -14,6 +15,8 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 		all: false
 	})
 	const [text, setText] = useState("")
+	const path = usePathname()
+	const router = useRouter()
 
 	const data = puradata.filter((d) => {
 		return d.userid._id === id;
@@ -33,6 +36,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 			}
 
 			if (data[0]?.products.length === 0 || data[0]?.products.length === 1) {
+				router.push(path)
 				setOpen(false)
 			} else {
 				setOpen(true)
@@ -42,6 +46,7 @@ const ProductsModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 			console.log(error)
 		} finally {
 			if (data[0]?.products.length === 0 || data[0]?.products.length === 1) {
+				router.push(path)
 				setOpen(false)
 			} else {
 				setOpen(true)

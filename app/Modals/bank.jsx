@@ -7,13 +7,14 @@ import { API } from '@/Essentials'
 import toast from 'react-hot-toast';
 import { usePathname, useRouter } from 'next/navigation';
 
-const Monetization = ({ id, setOpen, puradata, fetchData }) => {
+const BankRequest = ({ id, setOpen, puradata, fetchData }) => {
 	const [loading, setLoading] = useState(false)
 	const [state, setState] = useState(false)
 	const [text, setText] = useState("")
 	const path = usePathname()
 	const router = useRouter()
 	const data = puradata.filter((d) => {
+		console.log()
 		return d.id === id;
 	});
 
@@ -21,7 +22,7 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 		e.preventDefault()
 		try {
 			setLoading(true)
-			const res = await axios.post(`${API}/requests/${id}`, { status, text })
+			const res = await axios.post(`${API}/approveBank/${id}`, { status, text })
 			if (res.data.success) {
 				toast.success(res.data.message)
 				await fetchData()
@@ -38,6 +39,7 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 			setLoading(false)
 		}
 	}
+
 
 	if (loading) {
 		return <div className='fixed inset-0 flex justify-center items-center w-screen h-screen bg-black/50'>
@@ -65,12 +67,12 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 
 				</div>
 			</div>
-			<div className={` fixed inset-0 w-screen pn:max-sm:overflow-auto pn:max-sm:no-scrollbar min-h-full sm:h-screen bg-black/60 ${state ? "z-30" : "z-50 "}sm:bg-black/50 container flex justify-center items-center`} >
-				<div className='lg:w-[30%] sm:w-[55%] pp:w-[75%] pn:max-pp:w-[335px] flex flex-col text-black p-5 rounded-lg dark:text-white dark:bg-[#101010] bg-white'>
+			<div className='absolute top-0 left-0 md:fixed sm:inset-0 w-screen pn:max-sm:overflow-auto pn:max-sm:no-scrollbar min-h-full sm:h-screen bg-black/60 z-50 sm:bg-black/50 flex justify-center items-center'>
+				<div className='md:w-[40%] sm:w-[70%] pp:w-[90%] flex flex-col text-black p-5 rounded-lg dark:text-white dark:bg-[#101010] bg-white'>
 					<div className='flex justify-between items-center'>
 						<div className='flex gap-2 items-center'>
 							<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
-							<div className='font-bold'>Monetization Request</div>
+							<div className='font-bold'>Ads Request</div>
 						</div>
 						<div onClick={() => setOpen(false)}>
 							<RxCross2 />
@@ -82,12 +84,12 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 								<div class="flex items-center p-2">
 
 									<div class="relative">
-										<img class="h-16 w-16 rounded-full object-cover" src={data[0]?.profilepic} alt="Avatar" />
+										<img class="h-16 w-16 rounded-full object-cover" src={data[0]?.user?.dp} alt="Avatar" />
 										<div class="absolute inset-0 rounded-full shadow-inner"></div>
 									</div>
 									<div class="ml-2 flex flex-col gap-[2px]">
-										<h2 class="font-bold text-lg">{data[0]?.fullname}</h2>
-										<p class=" text-xs">@{data[0]?.username}</p>
+										<h2 class="font-bold text-lg">{data[0]?.user?.fullname}</h2>
+										<p class=" text-xs">@{data[0]?.user?.username}</p>
 										<p class=" text-xs">userid-{id}</p>
 									</div>
 								</div>
@@ -95,31 +97,29 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 							<div className='text-xs mt-2 p-2'>
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
 									<div>Request Send</div>
-									<div>{formatDate(data[0]?.requested)}</div>
-								</div>
-								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
-									<div>Joined on</div>
 									<div>{formatDate(data[0]?.createdAt)}</div>
 								</div>
+
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
-									<div>Community </div>
-									<div>{data[0]?.title}</div>
+									<div>Account Name </div>
+									<div>{data[0]?.bank?.personname}</div>
+								</div>
+
+								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
+									<div>Bankname</div>
+									<div>{data[0]?.bank?.bankname}</div>
 								</div>
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
-									<div>Community ID </div>
-									<div>{id}</div>
+									<div>Branchname</div>
+									<div>{data[0]?.bank?.branchname}</div>
 								</div>
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
-									<div>Members</div>
-									<div>{data[0]?.members}</div>
+									<div>Account No</div>
+									<div>{data[0]?.bank?.accountno}</div>
 								</div>
 								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
-									<div>Total posts</div>
-									<div>{data[0]?.posts}</div>
-								</div>
-								<div className='flex justify-between py-4 border-b text-xs items-center w-full'>
-									<div>Poularity </div>
-									<div>{data[0]?.engagement}</div>
+									<div>IFSC code</div>
+									<div>{data[0]?.bank?.IFSCcode}</div>
 								</div>
 								{/* <Buttons /> */}
 								{/* onClick={(e) => handleapprovals(e, "rejected")} */}
@@ -137,4 +137,4 @@ const Monetization = ({ id, setOpen, puradata, fetchData }) => {
 	)
 }
 
-export default Monetization
+export default BankRequest

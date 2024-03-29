@@ -161,7 +161,7 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 													<div className='flex justify-between mt-2 items-center'>
 														<div>
 															<div>Address</div>
-															<div>{uniqueSeller?.storeAddress.buildingno}, {uniqueSeller?.storeAddress.city}, {uniqueSeller?.storeAddress.state}</div>
+															<div>{uniqueSeller?.storeAddress[0].buildingno}, {uniqueSeller?.storeAddress[0].city}, {uniqueSeller?.storeAddress[0].state}</div>
 														</div>
 													</div>
 												</div>

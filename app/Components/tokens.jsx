@@ -76,6 +76,7 @@ const useTokenAndData = () => {
 				if (token) {
 					const { check, payload } = await checkToken(token)
 					if (check) {
+
 						setIsValid(true);
 						setData(payload)
 					} else if (checkRefreshTokenValidity()) {
