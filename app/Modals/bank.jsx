@@ -74,7 +74,7 @@ const BankRequest = ({ id, setOpen, puradata, fetchData }) => {
 							<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
 							<div className='font-bold'>Ads Request</div>
 						</div>
-						<div onClick={() => setOpen(false)}>
+						<div onClick={() => { setOpen(false); router.push(path) }}>
 							<RxCross2 />
 						</div>
 					</div>

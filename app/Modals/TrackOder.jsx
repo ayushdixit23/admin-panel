@@ -1,6 +1,7 @@
 import React from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { formatDate } from '../Components/Useful';
+import { usePathname, useRouter } from 'next/navigation';
 
 const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 
@@ -8,8 +9,8 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 	const data = puradata.filter((d) => {
 		return d._id === id;
 	});
-
-	console.log(data)
+	const path = usePathname()
+	const router = useRouter()
 
 	const uniqueSellerIds = [...new Set(data[0]?.sellerId.map(seller => seller?._id))];
 
@@ -21,7 +22,7 @@ const TrackOder = ({ id, setOpen, storeData, puradata, url, purl }) => {
 						<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
 						<div className='font-bold'>Track order</div>
 					</div>
-					<div onClick={() => setOpen(false)}>
+					<div onClick={() => { setOpen(false); router.push(path) }}>
 						<RxCross2 />
 					</div>
 				</div>

@@ -79,7 +79,7 @@ const StoreModel = ({ id, setOpen, puradata, fetchData, storeData }) => {
 							<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
 							<div className='font-bold'>Store request</div>
 						</div>
-						<div onClick={() => setOpen(false)} className='text-2xl'>
+						<div onClick={() => { setOpen(false); router.push(path) }} className='text-2xl'>
 							<RxCross2 />
 						</div>
 					</div>
