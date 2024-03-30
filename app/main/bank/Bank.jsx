@@ -48,12 +48,12 @@ const page = () => {
 				<BankRequest id={mid} setOpen={setOpen} fetchData={fetchData} puradata={data} />
 			}
 			<div className='px-4'>
-				<div className='text-2xl  font-bold text-[#C2B1FF] py-4'>Ads</div>
+				<div className='text-2xl  font-bold text-[#C2B1FF] py-4'>Bank</div>
 				<div className='p-3'>
 					<div className='dark:bg-[#101010] bg-[#fafafa] rounded-xl p-3'>
 						<div className='flex gap-2  items-center'>
 							<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
-							<div className='font-bold py-2 text-lg'>Ads Request </div>
+							<div className='font-bold py-2 text-lg'>Bank Request </div>
 						</div>
 						<div className='w-full mt-3 overflow-x-scroll no-scrollbar'>
 
