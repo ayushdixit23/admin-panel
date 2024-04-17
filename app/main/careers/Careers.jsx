@@ -1,10 +1,10 @@
 "use client"
 import { API } from '@/Essentials'
 import Pagination from '@/app/Components/Pagination'
+import Careers from '@/app/FetchComponents/Careers'
 import CommunityFetch from '@/app/FetchComponents/Community'
-import Monetization from '@/app/Modals/monteziation'
+import CareersModel from '@/app/Modals/careers'
 import axios from 'axios'
-import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -12,6 +12,7 @@ const page = () => {
 	const search = useSearchParams()
 	const mid = search.get("id")
 	const [open, setOpen] = useState(false)
+	const [url, setUrl] = useState("")
 	const [data, setData] = useState([])
 	const [client, setClient] = useState(false)
 
@@ -23,9 +24,10 @@ const page = () => {
 
 	const fetchData = async () => {
 		try {
-			const res = await axios.get(`${API}/v1/getCommunitiesforMon`)
+			const res = await axios.get(`${API}/v1/adminform`)
 			console.log(res.data)
-			setData(res.data.community)
+			setData(res.data.form)
+			setUrl(res.data.url)
 		} catch (error) {
 			console.log(error)
 		}
@@ -39,6 +41,8 @@ const page = () => {
 		setClient(true)
 	}, [])
 
+	console.log(postperData, typeof data)
+
 	if (!client) {
 		return null
 	}
@@ -46,19 +50,19 @@ const page = () => {
 	return (
 		<>
 			{open &&
-				<Monetization id={mid} setOpen={setOpen} fetchData={fetchData} puradata={data} />
+				<CareersModel id={mid} setOpen={setOpen} url={url} fetchData={fetchData} puradata={data} />
 			}
 			<div className='px-4'>
-				<div className='text-2xl  font-bold text-[#C2B1FF] py-4'>Communities</div>
+				<div className='text-2xl  font-bold text-[#C2B1FF] py-4'>Ads</div>
 				<div className='p-3'>
 					<div className='dark:bg-[#101010] bg-[#fafafa] rounded-xl p-3'>
 						<div className='flex gap-2  items-center'>
 							<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
-							<div className='font-bold py-2 text-lg'>Monetization request</div>
+							<div className='font-bold py-2 text-lg'>Ads Request </div>
 						</div>
 						<div className='w-full mt-3 overflow-x-scroll no-scrollbar'>
 
-							<CommunityFetch data={postperData} setOpen={setOpen} />
+							<Careers data={postperData} setOpen={setOpen} />
 							{data?.length > postPerPage && <Pagination
 								postPerPage={postPerPage}
 								setCurrentPage={setCurrentPage}
@@ -70,27 +74,6 @@ const page = () => {
 							}
 						</div>
 					</div>
-
-					<div className='dark:bg-[#101010] mt-4 bg-[#fafafa] rounded-xl p-3'>
-						<div className='flex gap-2 items-center'>
-							<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
-							<div className='font-bold py-2 text-lg'>Reports</div>
-						</div>
-						<div className='w-full mt-3 overflow-x-scroll no-scrollbar'>
-
-							<CommunityFetch data={postperData} setOpen={setOpen} />
-							{data?.length > postPerPage && <Pagination
-								postPerPage={postPerPage}
-								setCurrentPage={setCurrentPage}
-								currentPage={currentPage}
-								firstIndex={firstIndex}
-								lastindex={lastindex}
-								length={data.length}
-							/>
-							}
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</>
