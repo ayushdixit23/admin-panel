@@ -62,6 +62,9 @@ const Header = () => {
 						<li className='py-2'>
 							<Link onClick={toggleoff} href={"/main/bank"} className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 ">Bank</Link>
 						</li>
+						<li className='py-2'>
+							<Link onClick={toggleoff} href={"/main/careers"} className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 ">Careers</Link>
+						</li>
 					</ul>
 				</div>
 			</div >}
@@ -104,6 +107,9 @@ const Header = () => {
 								</li>
 								<Link href={"/main/bank"}>
 									<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Bank</div>
+								</Link>
+								<Link href={"/main/careers"}>
+									<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Careers</div>
 								</Link>
 								{/* <li>
 									<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Bugs & Reports</div>
