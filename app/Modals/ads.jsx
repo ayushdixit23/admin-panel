@@ -79,7 +79,7 @@ const AdsRequest = ({ id, setOpen, puradata, fetchData }) => {
 							<RxCross2 />
 						</div>
 					</div>
-					<div className='grid mt-3 grid-cols-1 gap-7 sm:grid-cols-5 w-full'>
+					<div className='grid mt-3 grid-cols-1 max-h-[80vh] overflow-y-scroll no-scrollbar gap-7 sm:grid-cols-5 w-full'>
 
 						<div class="rounded col-span-2 overflow-hidden shadow-lg">
 							<div>{data[0]?.contenttype?.startsWith("image") && <img className=" rounded-lg" src={data[0]?.media} alt="Jese image" />}

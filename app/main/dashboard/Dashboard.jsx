@@ -1,6 +1,9 @@
 "use client"
 import { API } from '@/Essentials'
+import Pagination from '@/app/Components/Pagination'
 import { formatDate } from '@/app/Components/Useful'
+import Latestuser from '@/app/FetchComponents/Latestuser'
+import LatestUserModel from '@/app/Modals/latestuser'
 import Monetization from '@/app/Modals/monteziation'
 import ProductsModel from '@/app/Modals/products'
 import StoreModel from '@/app/Modals/store'
@@ -20,8 +23,17 @@ const page = () => {
 	const [data, setData] = useState({
 		store: [],
 		product: [],
-		community: []
+		community: [],
+		latestUsers: []
 	})
+
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postPerPage, setPostPerPage] = useState(7);
+	const lastindex = currentPage * postPerPage;
+	const firstIndex = lastindex - postPerPage;
+	const postperData = data.latestUsers?.slice(firstIndex, lastindex);
+
+
 	const [count, setCount] = useState({
 		totalUser: "", totalCommunities: "", activeuser: "", order: ""
 	})
@@ -32,7 +44,7 @@ const page = () => {
 			const res = await axios.get(`${API}/dashboard`)
 			if (res.data.success) {
 				setData({
-					...data, store: res.data.store, community: res.data.community, product: res.data.product,
+					...data, store: res.data.store, community: res.data.community, product: res.data.product, latestUsers: res.data.data
 				})
 			} else {
 				toast.error("error in fetching")
@@ -81,6 +93,7 @@ const page = () => {
 			{open &&
 				<StoreModel id={mid} setOpen={setOpen} puradata={data.store} fetchData={fetchData} />
 			}
+
 			<div className='flex flex-col mt-2 p-3 py-6 w-full'>
 				<div>
 					<div className='mt-2 mb-4'>
@@ -105,6 +118,28 @@ const page = () => {
 						</div>
 					</div>
 				</div>
+
+				<div className='mt-4 dark:bg-[#101010] light:text-black rounded-xl p-4'>
+					<div className='flex gap-2 items-center'>
+						<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
+						<div className='font-bold text-lg'>Latest Users</div>
+					</div>
+					<div className='mt-4'>
+						<div className='overflow-auto no-scrollbar'>
+							<Latestuser data={postperData} />
+							{data.latestUsers?.length > postPerPage && <Pagination
+								postPerPage={postPerPage}
+								setCurrentPage={setCurrentPage}
+								currentPage={currentPage}
+								firstIndex={firstIndex}
+								lastindex={lastindex}
+								length={data.latestUsers.length}
+							/>
+							}
+						</div>
+					</div>
+				</div>
+
 				<div className='mt-4 dark:bg-[#101010] p-4'>
 					<div className='flex gap-2 items-center'>
 						<div className='bg-[#044967] rounded-[3px] w-[13px] h-5'></div>
