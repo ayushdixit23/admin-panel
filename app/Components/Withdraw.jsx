@@ -1,7 +1,48 @@
+import { API } from "@/Essentials";
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
 
-const BankFetch = ({ data, setOpen }) => {
+const Withdraw = ({ data, setOpen, fetchData }) => {
+  const [loading, setLoading] = useState(false);
+  const markPaid = async (id, wid, amount) => {
+    try {
+      setLoading(true);
+      const res = await axios.post(`${API}/v1/payuser/${id}/${wid}`, {
+        amount: Number(amount),
+      });
+      if (res.data.success) {
+        setLoading(false);
+        await fetchData();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const rejectRequest = async (wid) => {
+    try {
+      setLoading(true);
+      const res = await axios.post(`${API}/v1/declinepayuser/${wid}`);
+      if (res.data.success) {
+        setLoading(false);
+        await fetchData();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex justify-center items-center w-screen h-screen bg-black/50">
+        <div className="animate-spin flex justify-center items-center">
+          <ImSpinner9 />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <table className="w-full text-sm text-left rtl:text-right min-w-[1100px] text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase bg-[#f1f1f1] dark:bg-[#0b0808] dark:text-gray-400">
@@ -11,6 +52,9 @@ const BankFetch = ({ data, setOpen }) => {
 					</th> */}
           <th scope="col" className="px-6 py-3">
             User
+          </th>
+          <th scope="col" className="px-6 py-3">
+            Amount
           </th>
           <th scope="col" className="px-6 py-3">
             Bankname
@@ -27,7 +71,6 @@ const BankFetch = ({ data, setOpen }) => {
           <th scope="col" className="px-6 py-3">
             IFSCcode
           </th>
- 
           <th scope="col" className="px-2 py-3"></th>
         </tr>
       </thead>
@@ -56,21 +99,28 @@ const BankFetch = ({ data, setOpen }) => {
                   </div>
                 </div>
               </td>
+              <td className="px-6 py-4">₹ {d?.amount}</td>
               <td className="px-6 py-4">{d?.bank?.bankname}</td>
               <td className="px-6 py-4">{d?.bank?.personname}</td>
               <td className="px-6 py-4">{d?.bank?.branchname}</td>
               <td className="px-6 py-4">{d?.bank?.accountno}</td>
 
               <td className="px-6 py-4">{d?.bank?.IFSCcode}</td>
-          
-              <td className="px-6 py-4">
-                <Link
-                  href={`/main/bank?id=${d?.id}`}
-                  onClick={() => setOpen(true)}
-                  className="font-medium bg-[#41A956]/30 p-2 px-5 rounded-3xl text-[#41A956] hover:underline"
-                >
-                  View
-                </Link>
+              <td>
+                <div className="flex justify-center cursor-pointer items-center gap-2">
+                  <div
+                    onClick={() => rejectRequest(d?._id)}
+                    className="bg-[#cf3a30] p-1.5 text-white font-medium px-4 rounded-lg"
+                  >
+                    Reject
+                  </div>
+                  <div
+                    onClick={() => markPaid(d?.userid, d?._id, d?.amount)}
+                    className="bg-[#28974b] p-1.5 text-white font-medium px-4 rounded-lg"
+                  >
+                    Mark Paid
+                  </div>
+                </div>
               </td>
             </tr>
           ))}
@@ -90,4 +140,4 @@ const BankFetch = ({ data, setOpen }) => {
   );
 };
 
-export default BankFetch;
+export default Withdraw;
