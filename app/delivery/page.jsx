@@ -57,14 +57,14 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-[#101010] p-3 rounded-xl  flex flex-col gap-y-10">
+    <div className="bg-[#101010] p-3 rounded-xl h-full flex flex-col overflow-y-scroll no-scrollbar  ">
       <div className="flex gap-2  items-center">
         <div className="bg-[#044967] rounded-[3px] w-[13px] h-5"></div>
         <div className="font-bold py-2 text-lg">Delivery</div>
       </div>
       <div
         ref={scrollContainerRef}
-        className="flex flex-col p-4 min-w-[320px] gap-y-[12px]"
+        className="flex flex-col mt-3 overflow-y-scroll no-scrollbar px-4 min-w-[320px] gap-y-[12px]"
       >
         <div className="text-xs">
           <div className="flex justify-between items-center text-md w-full">

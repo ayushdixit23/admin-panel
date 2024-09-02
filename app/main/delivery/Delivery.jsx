@@ -3,8 +3,10 @@ import { API } from "@/Essentials";
 import Pagination from "@/app/Components/Pagination";
 import DeliveryFetch from "@/app/FetchComponents/DeliveryFetch";
 import axios from "axios";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 const page = () => {
   const search = useSearchParams();
@@ -79,6 +81,18 @@ const page = () => {
                 />
               )}
             </div>
+          </div>
+          <div className="flex justify-end -mt-3 items-center">
+            <Link
+              href={"/delivery"}
+              className="p-1.5 px-4 bg-blue-600 flex justify-center  items-center gap-1 text-white rounded-xl text-sm"
+            >
+              <div>Check Deliveries</div>
+
+              <div className="text-3xl">
+                <MdOutlineArrowRightAlt />
+              </div>
+            </Link>
           </div>
         </div>
       </div>

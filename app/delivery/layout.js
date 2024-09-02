@@ -6,8 +6,8 @@ export default function DeliveryLayout({ children }) {
 			<div className="h-[12vh]">
 				<Header />
 			</div>
-			<div className="h-[88vh] dark:bg-[#171717] overflow-y-scroll py-2 px-3 no-scrollbar">
-				<div className="dark:bg-[#0D0D0D] rounded-xl">
+			<div className="h-[88vh] dark:bg-[#171717] py-2 px-3 ">
+				<div className="dark:bg-[#0D0D0D] h-full rounded-xl">
 					{children}
 				</div>
 			</div>

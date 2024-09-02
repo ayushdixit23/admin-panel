@@ -117,6 +117,15 @@ const Header = () => {
                   Delivery
                 </Link>
               </li>
+              <li className="py-2">
+                <Link
+                  onClick={toggleoff}
+                  href={"/main/errors"}
+                  className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                >
+                  Errors
+                </Link>
+              </li>
               {/* <li className='py-2'>
 							<Link onClick={toggleoff} href={"/main/careers"} className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 ">Careers</Link>
 						</li> */}
@@ -224,6 +233,15 @@ const Header = () => {
                     className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
                   >
                     Delivery
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    onClick={toggleoff}
+                    href={"/main/errors"}
+                    className="block  pl-3 light:text-white text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                  >
+                    Errors
                   </Link>
                 </li>
               </ul>
