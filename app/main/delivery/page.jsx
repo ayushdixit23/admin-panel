@@ -2,7 +2,7 @@
 import React, { Suspense } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import dynamic from "next/dynamic";
-const Bank = dynamic(() => import("./Bank"), { ssr: false });
+const Delivery = dynamic(() => import("../delivery/Delivery"), { ssr: false });
 
 const page = () => {
   return (
@@ -15,7 +15,7 @@ const page = () => {
         </div>
       }
     >
-      <Bank />
+      <Delivery />
     </Suspense>
   );
 };

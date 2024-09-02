@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import TokenDataWrapper from "../app/Components/Tokenwrap"
 import { Toaster } from "react-hot-toast";
+import Providers from "./redux/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Toaster />
         <TokenDataWrapper>
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </TokenDataWrapper>
       </body>
     </html>

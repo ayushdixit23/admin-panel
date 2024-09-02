@@ -108,6 +108,15 @@ const Header = () => {
                   Bank
                 </Link>
               </li>
+              <li className="py-2">
+                <Link
+                  onClick={toggleoff}
+                  href={"/main/delivery"}
+                  className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                >
+                  Delivery
+                </Link>
+              </li>
               {/* <li className='py-2'>
 							<Link onClick={toggleoff} href={"/main/careers"} className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 ">Careers</Link>
 						</li> */}
@@ -208,6 +217,15 @@ const Header = () => {
                 {/* <li>
 								<div className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</div>
 							</li> */}
+                <li>
+                  <Link
+                    onClick={toggleoff}
+                    href={"/main/delivery"}
+                    className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                  >
+                    Delivery
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
