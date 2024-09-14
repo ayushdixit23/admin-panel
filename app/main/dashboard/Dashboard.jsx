@@ -27,8 +27,6 @@ const page = () => {
     latestUsers: [],
   });
 
-  console.log(data.product, "data.product");
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(7);
   const lastindex = currentPage * postPerPage;
@@ -47,13 +45,12 @@ const page = () => {
     try {
       const res = await axios.get(`${API}/dashboard`);
       if (res.data.success) {
-        console.log(res.data);
         setData({
           ...data,
-          store: res.data.store,
-          community: res.data.community,
-          product: res.data.product,
-          latestUsers: res.data.data,
+          store: res.data?.store,
+          community: res.data?.community,
+          product: res.data?.product,
+          latestUsers: res.data?.data,
         });
       } else {
         toast.error("error in fetching");
