@@ -32,7 +32,6 @@ export default function MainLayout({ children }) {
       socket.on("admin-new-creator-user", () => handleAudioPlay(creator));
       socket.on("admin-new-post", () => handleAudioPlay(post));
 
-      // Clean up the socket listeners on component unmount
       return () => {
         socket.off("admin-new-user");
         socket.off("admin-new-community");
@@ -46,12 +45,11 @@ export default function MainLayout({ children }) {
     }
   }, [socket]);
 
-  // Effect to handle audio playback when audioToPlay changes
   useEffect(() => {
     const playAudio = async () => {
       try {
-        await audioRef.current.load(); // Load the new audio
-        await audioRef.current.play(); // Play the audio
+        await audioRef.current.load();
+        await audioRef.current.play(); 
         console.log("Audio played successfully.");
       } catch (error) {
         console.log("Audio play blocked or failed:", error);
@@ -59,8 +57,7 @@ export default function MainLayout({ children }) {
     };
 
     playAudio();
-  }, [audioToPlay]); // Dependency on audioToPlay
-
+  }, [audioToPlay]); 
   return (
     <div className="flex flex-col h-screen w-full">
       <div className="h-[12vh]">
