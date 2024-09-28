@@ -1,8 +1,11 @@
+
 import { Inter } from "next/font/google";
 import "./globals.css";
-import TokenDataWrapper from "../app/Components/Tokenwrap"
 import { Toaster } from "react-hot-toast";
 import Providers from "./redux/Providers";
+import { SocketContextProvider } from "./Components/SocketWrapper";
+import { AuthContextProvider } from "./Components/AuthWrapper";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +19,23 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Toaster />
-        <TokenDataWrapper>
-          <Providers>
-            {children}
-          </Providers>
-        </TokenDataWrapper>
+        {/* <TokenDataWrapper> */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthContextProvider>
+            <Providers>
+              <SocketContextProvider>
+                {children}
+              </SocketContextProvider>
+            </Providers>
+          </AuthContextProvider>
+        </ThemeProvider>
+
+        {/* </TokenDataWrapper> */}
       </body>
     </html>
   );

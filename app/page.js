@@ -6,6 +6,8 @@ import axios from 'axios'
 import { API } from '@/Essentials'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import Cookies from 'js-cookie'
+import { useAuthContext } from './Components/AuthWrapper'
 
 const page = () => {
   const [login, setLogin] = useState({
@@ -13,6 +15,7 @@ const page = () => {
     password: ""
   })
   const router = useRouter()
+  const { setData, setAuth } = useAuthContext()
 
   const sendLoginDetails = async (e) => {
     if (!login.email || !login.password) {
@@ -28,8 +31,17 @@ const page = () => {
       const res = await axios.post(`${API}/adminlogin`, data)
       if (res.data.success) {
         toast.success("Login Successfull!")
+
         localStorage.setItem("atoken", res.data.access_token)
         localStorage.setItem("rtoken", res.data.refresh_token)
+
+        setData(res.data?.data)
+        setAuth(true)
+
+        Cookies.set("USER_ACCESS_TOKEN", res.data.access_token, { expires: 7 })
+        Cookies.set("USER_REFRESH_TOKEN", res.data.refresh_token, { expires: 7 })
+
+
         router.push("/main/dashboard")
       } else {
         toast.error("Login Failed!")

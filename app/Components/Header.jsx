@@ -9,6 +9,7 @@ import useTokenAndData from "./tokens";
 import { useRouter } from "next/navigation";
 import { RiMenu3Fill } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const { data } = useTokenAndData();
@@ -19,6 +20,10 @@ const Header = () => {
     try {
       localStorage.removeItem("atoken");
       localStorage.removeItem("rtoken");
+
+      Cookies.remove("USER_ACCESS_TOKEN");
+      Cookies.remove("USER_REFRESH_TOKEN");
+
       router.push("/");
     } catch (error) {
       console.log(error);
@@ -239,7 +244,7 @@ const Header = () => {
                   <Link
                     onClick={toggleoff}
                     href={"/main/delivery"}
-                    className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                    className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Delivery
                   </Link>
@@ -248,7 +253,7 @@ const Header = () => {
                   <Link
                     onClick={toggleoff}
                     href={"/main/creators"}
-                    className="block  pl-3 light:text-white text-white  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                    className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Creators
                   </Link>
@@ -257,7 +262,7 @@ const Header = () => {
                   <Link
                     onClick={toggleoff}
                     href={"/main/errors"}
-                    className="block  pl-3 light:text-white text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                    className="block py-2 pr-4 pl-3 text-black dark:text-white border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0  lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Errors
                   </Link>
