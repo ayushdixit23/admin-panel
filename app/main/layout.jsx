@@ -13,7 +13,7 @@ import { useSocketContext } from "../Components/SocketWrapper";
 
 export default function MainLayout({ children }) {
   const audioRef = useRef();
-  const [audioToPlay, setAudioToPlay] = useState(user);
+  const [audioToPlay, setAudioToPlay] = useState("");
   const { socket } = useSocketContext();
 
   useEffect(() => {

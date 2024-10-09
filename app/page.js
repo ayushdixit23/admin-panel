@@ -37,10 +37,13 @@ const page = () => {
 
         setData(res.data?.data)
         setAuth(true)
-
-        Cookies.set("USER_ACCESS_TOKEN", res.data.access_token, { expires: 7 })
-        Cookies.set("USER_REFRESH_TOKEN", res.data.refresh_token, { expires: 7 })
-
+        
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 7);
+  
+        Cookies.set(`USER_ACCESS_TOKEN`, res.data.access_token, { expires: expirationDate });
+        Cookies.set(`USER_REFRESH_TOKEN`, res.data.refresh_token, { expires: expirationDate });
+  
 
         router.push("/main/dashboard")
       } else {

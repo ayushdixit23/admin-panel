@@ -49,12 +49,12 @@ const Header = () => {
             <ul className="font-medium light:text-white w-full flex flex-col gap-4 p-4  mt-4 rounded-lg bg-gray-50dark:border-gray-700">
               <li className="pb-2 mb-2 flex justify-between border-b border-white items-center">
                 <div className="flex items-center text-white gap-2">
-                  <div>
+                  <Link href="/main/user" className="w-[50px] h-[50px] rounded-2xl overflow-hidden">
                     <img
                       src={data?.pic}
-                      className="w-[50px] h-[50px] rounded-2xl"
+                      className="w-full h-full object-cover"
                     />
-                  </div>
+                  </Link>
                   <div className="flex flex-col">
                     <div>{data?.fullname}</div>
                     <div className="text-xs">@{data?.username}</div>
@@ -158,12 +158,12 @@ const Header = () => {
             </div>
             <div className="flex gap-6 items-center order-2">
               {/* <div className='hidden pp:block'>{data?.fullname}</div> */}
-              <div className="hidden pp:block">
+              <Link href="/main/user" className="hidden w-[50px] h-[50px] overflow-hidden rounded-2xl pp:block">
                 <img
                   src={data?.pic}
-                  className="w-[50px] h-[50px] rounded-2xl"
+                  className="w-full h-full object-cover"
                 />
-              </div>
+              </Link>
               <div className="flex justify-center items-center gap-2">
                 <div>
                   <ModeToggle />
