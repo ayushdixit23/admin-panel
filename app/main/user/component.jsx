@@ -53,12 +53,12 @@ const DeletePostModal = ({ isOpen, onClose, onDelete }) => {
 const page = () => {
   const [text, setText] = useState("")
   const [arr, setArr] = useState([])
-  const [selectedUser, setSelectedUser] = useState(arr[0]?.id || ""); // Default to first user
+  const [selectedUser, setSelectedUser] = useState(arr.length>0?arr[0]?.id : ""); // Default to first user
   const [users, setUsers] = useState([])
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown state
   const [isDropdownOpenCom, setIsDropdownOpenCom] = useState(false); // Track dropdown state
   const [communities, setCommunities] = useState([])
-  const [selectedCom, setSelectedCom] = useState(communities[0]?.id || ""); // Default to first user
+  const [selectedCom, setSelectedCom] = useState(communities.length>0?communities[0]?.id : ""); // Default to first user
   const params = useSearchParams()
   const [isModalOpen, setModalOpen] = useState(false);
   const mediaType = params.get("mediaType")
@@ -86,18 +86,14 @@ const page = () => {
     
   };
 
-
-
   const handleSearch = async () => {
     try {
       if (text) {
         const res = await axios.post(`${API}/givePassword`, { text })
-
         console.log(res.data)
         setUsers(res.data.data)
       } else {
         toast.error("No input found!")
-
       }
     } catch (error) {
       toast.error("Something Went Wrong")
@@ -154,18 +150,12 @@ const page = () => {
     fetchData();
   }, []);
 
-  console.log(selectedUser)
-
-  useEffect(() => {
-    handleSearch()
-  }, [text])
-
 
   useEffect(() => {
     if (selectedUser) {
-      fetchCommunity(selectedUser.id)
+      fetchCommunity(selectedUser?.id)
     }
-  }, [selectedUser.id])
+  }, [selectedUser])
 
   const fetchCommunity = async (id) => {
     try {
@@ -189,104 +179,6 @@ const page = () => {
 };
 
   return <>
-    {/* <div className="dark:bg-[#101010] rounded-xl">
-      <div className="text-2xl py-2 font-semibold">User Management</div>
-
-      <div>
-        <div>
-          Search
-        </div>
-
-        <div><input className="p-2 outline-none border" placeholder="Search for email,username or fullname" onChange={(e) => setText(e.target.value)} value={text} /></div>
-        <div onClick={handleSearch} >Search</div>
-      </div>
-
-      <div>{users.map((d) => (
-        <div className="flex justify-between items-center  px-4 w-full">
-          <div className="flex  items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-            <div className="w-10 h-10 rounded-full overflow-hidden ">
-              <img
-                className="w-full h-full object-cover"
-                src={d?.dp}
-                alt="user pic"
-              />
-            </div>
-
-            <div className="flex gap-5 items-center">
-
-              <div className="ps-3">
-                <div className="text-base font-semibold">{d?.fullname}</div>
-                <div className="text-base font-semibold">{d?.password ? d?.password : "undefined"}</div>
-              </div>
-
-
-            </div>
-          </div>
-          <div>
-            <GoPlus className="text-2xl cursor-pointer" onClick={() => savetoLocalStorage(d)} />
-
-          </div>
-        </div>
-      ))}</div>
-
-
-      <div className="w-full relative">
-
-        <div
-          className="flex justify-between items-center px-4 py-2  cursor-pointer border border-gray-300 rounded-md"
-          onClick={toggleDropdown}
-        >
-          <div className="flex items-center">
-            <div className="w-10 h-10 rounded-full overflow-hidden">
-              <img
-                className="w-full h-full object-cover"
-                src={selectedUser?.dp}
-                alt="user pic"
-              />
-            </div>
-            <div className="ps-3">
-              <div className="text-base font-semibold">{selectedUser?.fullname}</div>
-              <div className="text-base text-gray-500">{selectedUser?.username}</div>
-            </div>
-          </div>
-          <div>
-            {isDropdownOpen ? (
-              <GoChevronUp className="text-2xl" />
-            ) : (
-              <GoChevronDown className="text-2xl" />
-            )}
-          </div>
-        </div>
-
-
-        {isDropdownOpen && (
-          <div className="absolute z-10 mt-1  w-full border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-            {arr.map((d) => (
-              <div
-                key={d.id}
-                className="flex justify-between items-center px-4 py-2 cursor-pointer h"
-                onClick={() => handleUserSelect(d)}
-              >
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full overflow-hidden">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={d?.dp}
-                      alt="user pic"
-                    />
-                  </div>
-                  <div className="ps-3">
-                    <div className="text-sm font-semibold">{d?.fullname}</div>
-                    <div className="text-sm text-gray-500">{d?.username}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-    </div> */}
 
     <div className="dark:bg-[#101010] bg-white rounded-xl p-6 shadow-lg">
       <div className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">User Management</div>
@@ -301,6 +193,7 @@ const page = () => {
             onChange={(e) => setText(e.target.value)}
             value={text}
           />
+        
           <button
             onClick={handleSearch}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
@@ -314,7 +207,7 @@ const page = () => {
       <div className="space-y-4">
         {users.map((d) => (
           <div
-            key={d.id}
+            key={d?.id}
             className="flex justify-between items-center p-4 rounded-md shadow-md hover:shadow-lg transition"
           >
             <div className="flex items-center space-x-4">
@@ -371,7 +264,7 @@ const page = () => {
           <div className="absolute z-10 mt-2 w-full bg-black/50 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
             {arr.map((d) => (
               <div
-                key={d.id}
+                key={d?.id}
                 className="flex justify-between items-center px-4 py-2 cursor-pointer hover dark:hover:bg-gray-800 transition"
                 onClick={() => handleUserSelect(d)}
               >
@@ -426,7 +319,7 @@ const page = () => {
           <div className="absolute z-10 mt-2 w-full bg-black/50 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
             {communities.map((d) => (
               <div
-                key={d.id}
+                key={d?.id}
                 className="flex justify-between items-center px-4 py-2 cursor-pointer hover dark:hover:bg-gray-800 transition"
                 onClick={() => handleUserSelectCom(d)}
               >

@@ -9,8 +9,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 const AdsRequest = ({ id, setOpen, url, puradata, fetchData }) => {
   const [loading, setLoading] = useState(false);
-  const [state, setState] = useState(false);
-  const [text, setText] = useState("");
   const path = usePathname();
   const router = useRouter();
   console.log(puradata);
@@ -55,8 +53,8 @@ const AdsRequest = ({ id, setOpen, url, puradata, fetchData }) => {
   return (
     <>
       <div className="absolute top-0 left-0 md:fixed sm:inset-0 w-screen pn:max-sm:overflow-auto pn:max-sm:no-scrollbar min-h-full sm:h-screen bg-black/60 z-50 sm:bg-black/50 flex justify-center items-center">
-        <div className="md:w-[80%] sm:w-[90%] w-full flex flex-col text-black p-5 rounded-lg dark:text-white dark:bg-[#101010] bg-white">
-          <div className="flex justify-between items-center">
+        <div className="md:w-[90%] sm:w-[90%] max-h-[90%]  w-full flex flex-col text-black p-5 rounded-lg dark:text-white dark:bg-[#101010] bg-white">
+          <div className="flex justify-between  items-center">
             <div className="flex gap-2 items-center">
               <div className="bg-[#044967] rounded-[3px] w-[13px] h-5"></div>
               <div className="font-bold">Careers Request</div>
@@ -70,24 +68,31 @@ const AdsRequest = ({ id, setOpen, url, puradata, fetchData }) => {
               <RxCross2 />
             </div>
           </div>
-          <div className="grid mt-3 grid-cols-1 gap-7 sm:grid-cols-5 w-full">
+          <div className="grid mt-3 grid-cols-1 gap-7 overflow-y-scroll  max-h-full h-full sm:grid-cols-5 w-full">
             <div class="rounded col-span-2 overflow-hidden shadow-lg">
-              {console.log(url + data[0]?.doc)}
-              <div>
+
+              {
+                data?.[0]?.isPdf ?  <a href={`${data?.[0]?.url}`} target="_blank" className="flex justify-center items-center h-full">
                 {" "}
+             <div className="bg-blue-500 text-white p-2 px-5 rounded-lg">View pdf</div>   
+              </a>:  <div target="_blank">
+               
                 <img
                   className="min-w-[300px] min-h-[300px] rounded-lg"
-                  src={url + data[0]?.doc}
+                  src={data[0]?.url}
                   alt="Jese image"
                 />
               </div>
+              }
+
+            
 
               <div class="py-4">
                 <div class="font-bold text-xl mb-2">{data[0]?.headline}</div>
                 <p class="text-gray-700 text-base">{data[0]?.desc}</p>
               </div>
             </div>
-            <div className="col-span-3 flex flex-grow h-full justify-between flex-col gap-5">
+            <div className="col-span-3 flex flex-grow overflow-y-scroll max-h-full justify-between flex-col gap-5">
               <div className=" flex flex-col gap-5">
                 <div className="flex items-center gap-2">
                   <img

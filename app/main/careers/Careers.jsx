@@ -12,7 +12,6 @@ const page = () => {
   const search = useSearchParams();
   const mid = search.get("id");
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState("");
   const [data, setData] = useState([]);
   const [client, setClient] = useState(false);
 
@@ -27,7 +26,7 @@ const page = () => {
       const res = await axios.get(`${API}/v1/adminform`);
       console.log(res.data);
       setData(res.data.form);
-      setUrl(res.data.url);
+      // setUrl(res.data.url);
     } catch (error) {
       console.log(error);
     }
@@ -49,15 +48,15 @@ const page = () => {
 
   return (
     <>
-      {open && (
-        <CareersModel
-          id={mid}
-          setOpen={setOpen}
-          url={url}
-          fetchData={fetchData}
-          puradata={data}
-        />
-      )}
+
+      {mid && <CareersModel
+        id={mid}
+        setOpen={setOpen}
+
+        fetchData={fetchData}
+        puradata={data}
+      />}
+
       <div className="px-4">
         <div className="text-2xl  font-bold text-[#C2B1FF] py-4">Careers</div>
         <div className="p-3">
